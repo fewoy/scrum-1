@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.template.defaulttags import register
 from .models import *
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -213,6 +214,7 @@ def releases(request):
         form = ReleaseForm()
         context = {
             'output': output,
+            'widget_type_map': WIDGET_TYPE_TO_CLASS,
             'form': form,
         }
 

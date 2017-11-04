@@ -1,11 +1,23 @@
 <div id="scrum-add-new-modal" class="scrum-modal">
     <div class="scrum-modal-content">
         <span class="scrum-modal-close">&times;</span>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p  }}
-            <input type="submit" value="Submit" />
-        </form>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    {{ field.errors }}
+                    <label class="mdl-textfield__label"
+                           for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">Save</button>
+            </form>
+        </div>
     </div>
 </div>
 
