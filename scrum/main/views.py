@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
-from .models import User
+from django.utils import timezone
+from .models import User, UserStory, UserStoryForm
 
 from django.http import HttpResponse
 
@@ -33,7 +34,45 @@ def story(request, story_id):
     return HttpResponse("Story")
 
 def stories(request):
-    return HttpResponse("Stories")
+    if request.method == 'GET':
+        form = UserStoryForm()
+    else:
+        form = UserStoryForm(request.POST)
+        if form.is_valid():
+            sprint = form.cleaned_data['sprint']
+            role = form.cleaned_data['role']
+            feature = form.cleaned_data['feature']
+            benefit = form.cleaned_data['benefit']
+            category = form.cleaned_data['category']
+            owners = form.cleaned_data['owners']
+            tags = form.cleaned_data['tags']
+            required = form.cleaned_data['required']
+            points = form.cleaned_data['points']
+            due_date = form.cleaned_data['due_date']
+            created_date = timezone.now()
+            last_updated_date = timezone.now()
+
+            story = UserStory.objects.create(
+                sprint=sprint,
+                role=role,
+                feature=feature,
+                benefit=benefit,
+                category=category,
+                owners=owners,
+                tags=tags,
+                required=required,
+                points=points,
+                due_date=due_date,
+                created_date=created_date,
+                last_updated_date=last_updated_date,
+            )
+            story.save()
+
+            return render(request, 'main/stories.html', {})
+
+    return render(request, 'main/stories.html', {
+        'form': form,
+    })
 
 def sprint(request, sprint_id):
     return HttpResponse("Sprint")
