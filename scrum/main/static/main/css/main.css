@@ -22,8 +22,16 @@
     border: 1px solid #888;
     width: 80%;
 }
-.scrum-modal-content label {
-    font-size: 18px;
+.scrum-modal-button {
+    bottom: 0px;
+}
+.page-content {
+}
+.mdl-textfield {
+    width: 100%;
+}
+.scrum-modal-input-label {
+    display: block;
 }
 .scrum-modal-close {
     color: #aaa;

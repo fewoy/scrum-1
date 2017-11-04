@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, Textarea, TextInput, DateInput, Select, SelectMultiple, ChoiceField, NumberInput
 from django.contrib.auth.models import User
 
 WIDGET_TYPE_TO_CLASS = {
@@ -71,6 +71,26 @@ class UserStoryForm(ModelForm):
         model = UserStory
         fields = '__all__'
         exclude = ['created_date', 'last_updated_date']
+        widgets = {
+            'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'sprint': Select(attrs={'class': 'mdl-textfield__input'}),
+            'role': Select(attrs={'class': 'mdl-textfield__input'}),
+            'feature': Textarea(attrs={'class': 'mdl-textfield__input'}),
+            'benefit': Textarea(attrs={'class': 'mdl-textfield__input'}),
+            'category': Select(attrs={'class': 'mdl-textfield__input'}),
+            'owners': SelectMultiple(attrs={'class': 'mdl-textfield__input'}),
+            'tags': SelectMultiple(attrs={'class': 'mdl-textfield__input'}),
+            'required': SelectMultiple(attrs={'class': 'mdl-textfield__input'}),
+            'points': SelectMultiple(attrs={'class': 'mdl-textfield__input'}),
+            'due_date': DateInput(attrs={'type': 'date'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(UserStoryForm, self).__init__(*args, **kwargs)
+        points = Point.objects.order_by("amount")
+        point_list = [(p.amount, str(p.amount) + " hours") for p in points]
+        self.fields['points'] = ChoiceField(choices=point_list)
+
 
 class UserForm(ModelForm):
     class Meta:
@@ -81,16 +101,25 @@ class RoleForm(ModelForm):
     class Meta:
         model = Role
         fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
+        }
 
 class TagForm(ModelForm):
     class Meta:
         model = Tag
         fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
+        }
 
 class CategoryForm(ModelForm):
     class Meta:
         model = Category
         fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
+        }
 
 class ReleaseForm(ModelForm):
     class Meta:
@@ -98,16 +127,25 @@ class ReleaseForm(ModelForm):
         fields = '__all__'
         widgets = {
             'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
-            'start_date': TextInput(attrs={'class': 'mdl-textfield__input'}),
-            'due_date': TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'start_date': DateInput(attrs={'type': 'date'}),
+            'due_date': DateInput(attrs={'type': 'date'}),
         }
 
 class SprintForm(ModelForm):
     class Meta:
         model = Sprint
         fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'release': Select(attrs={'class': 'mdl-textfield__input'}),
+            'start_date': DateInput(attrs={'type': 'date'}),
+            'due_date': DateInput(attrs={'type': 'date'}),
+        }
 
 class PointForm(ModelForm):
     class Meta:
         model = Point
         fields = '__all__'
+        widgets = {
+            'amount': NumberInput(attrs={'class': 'mdl-textfield__input'}),
+        }

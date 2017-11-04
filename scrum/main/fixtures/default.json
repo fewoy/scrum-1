@@ -94,49 +94,49 @@
     "model": "main.point",
     "pk": 1,
     "fields": {
-      "amount": "1"
+      "amount": 1
     }
   },
   {
     "model": "main.point",
     "pk": 2,
     "fields": {
-      "amount": "2"
+      "amount": 2
     }
   },
   {
     "model": "main.point",
     "pk": 3,
     "fields": {
-      "amount": "4"
+      "amount": 4
     }
   },
   {
     "model": "main.point",
     "pk": 4,
     "fields": {
-      "amount": "8"
+      "amount": 8
     }
   },
   {
     "model": "main.point",
     "pk": 5,
     "fields": {
-      "amount": "16"
+      "amount": 16
     }
   },
   {
     "model": "main.point",
     "pk": 6,
     "fields": {
-      "amount": "24"
+      "amount": 24
     }
   },
   {
     "model": "main.point",
     "pk": 7,
     "fields": {
-      "amount": "40"
+      "amount": 40
     }
   }
 ]

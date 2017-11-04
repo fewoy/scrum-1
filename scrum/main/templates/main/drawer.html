@@ -7,12 +7,12 @@
         <a class="mdl-navigation__link" href="/releases"><i class="material-icons">flight_takeoff</i> Releases</a>
         <a class="mdl-navigation__link" href="/leaderboard"><i class="material-icons">trending_up</i> Leaderboard</a>
         <a class="mdl-navigation__link" href="/backlog"><i class="material-icons">folder_open</i> Backlog</a>
-        {% if admin %}
+        {% if user.is_superuser %}
         <a class="mdl-navigation__link" href="/users"><i class="material-icons">people</i> Users</a>
         <a class="mdl-navigation__link" href="/roles"><i class="material-icons">school</i> Roles</a>
         <a class="mdl-navigation__link" href="/categories"><i class="material-icons">layers</i> Categories</a>
         <a class="mdl-navigation__link" href="/tags"><i class="material-icons">apps</i> Tags</a>
-        <a class="mdl-navigation__link" href="/points"><i class="material-icons">exposure_plus_one</i> Points</a>
+        <a class="mdl-navigation__link" href="/points"><i class="material-icons">plus_one</i> Points</a>
         {% endif %}
         <a class="mdl-navigation__link" href="/logout"><i class="material-icons">subdirectory_arrow_right</i> Logout</a>
     </nav>

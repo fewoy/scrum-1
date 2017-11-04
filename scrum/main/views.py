@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.template.defaulttags import register
 from .models import *
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -14,6 +13,7 @@ def index(request):
     output = ", ".join([u.username for u in users])
     context = {
         'output': output,
+        'title': "Home",
     }
     return render(request, "main/index.html", context)
 
@@ -27,6 +27,7 @@ def tags(request):
         context = {
             'output': output,
             'form': form,
+            'title': "Tags",
         }
 
         return render(request, "main/tags.html", context)
@@ -51,6 +52,7 @@ def categories(request):
         context = {
             'output': output,
             'form': form,
+            'title': "Categories",
         }
 
         return render(request, "main/categories.html", context)
@@ -68,13 +70,14 @@ def categories(request):
 @login_required
 def points(request):
     points = Point.objects.order_by('amount')
-    output = ", ".join([p.amount for p in points])
+    output = ", ".join([str(p.amount) for p in points])
 
     if request.method == 'GET':
         form = PointForm()
         context = {
             'output': output,
             'form': form,
+            'title': "Points",
         }
 
         return render(request, "main/points.html", context)
@@ -111,6 +114,7 @@ def stories(request):
         context = {
             'output': output,
             'form': form,
+            'title': "Stories",
         }
 
         return render(request, "main/stories.html", context)
@@ -152,6 +156,7 @@ def sprints(request):
         context = {
             'output': output,
             'form': form,
+            'title': "Sprints",
         }
 
         return render(request, "main/sprints.html", context)
@@ -183,6 +188,7 @@ def users(request):
         context = {
             'output': output,
             'form': form,
+            'title': "Users",
         }
 
         return render(request, "main/users.html", context)
@@ -216,6 +222,7 @@ def releases(request):
             'output': output,
             'widget_type_map': WIDGET_TYPE_TO_CLASS,
             'form': form,
+            'title': "Releases",
         }
 
         return render(request, "main/releases.html", context)
@@ -246,6 +253,7 @@ def roles(request):
         context = {
             'output': output,
             'form': form,
+            'title': "Roles",
         }
 
         return render(request, "main/roles.html", context)

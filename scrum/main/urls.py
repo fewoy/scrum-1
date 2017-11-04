@@ -1,7 +1,6 @@
 from django.conf.urls import url
 
 from . import views
-
 urlpatterns = [
     url(r'^$', views.index, name='index'),
 
@@ -9,6 +8,7 @@ urlpatterns = [
     url(r'^tags/$', views.tags, name='tags'),
     url(r'^categories/$', views.categories, name='categories'),
     url(r'^points/$', views.points, name='points'),
+    url(r'^roles/$', views.roles, name='roles'),
     url(r'^leaderboard/$', views.leaderboard, name='leaderboard'),
 
     url(r'^users/$', views.users, name='users'),
