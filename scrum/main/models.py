@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 
 class Role(models.Model):
     name = models.CharField(max_length=200)
@@ -31,18 +32,10 @@ class Release(models.Model):
 class Sprint(models.Model):
     name = models.CharField(max_length=200, unique=True)
     release = models.ForeignKey(Release)
-    due_date = models.DateField(null=True, db_index=True)
     start_date = models.DateField(null=True, db_index=True)
+    due_date = models.DateField(null=True, db_index=True)
     def __str__(self):
         return self.name
-
-class User(models.Model):
-    username = models.CharField(max_length=200, unique=True, db_index=True)
-    email = models.CharField(max_length=200, unique=True, db_index=True)
-    password = models.CharField(max_length=200)
-    admin = models.BooleanField(default=False, db_index=True)
-    def __str__(self):
-        return self.username
 
 class UserStory(models.Model):
     name = models.CharField(max_length=200)
@@ -51,9 +44,9 @@ class UserStory(models.Model):
     feature = models.TextField()
     benefit = models.TextField()
     category = models.ForeignKey(Category, db_index=True)
-    owners = models.ManyToManyField(User, db_index=True)
-    tags = models.ManyToManyField(Tag, db_index=True)
-    required = models.ManyToManyField("self", db_index=True)
+    owners = models.ManyToManyField(User, db_index=True, blank=True)
+    tags = models.ManyToManyField(Tag, db_index=True, blank=True)
+    required = models.ManyToManyField("self", db_index=True, blank=True)
     points = models.IntegerField()
     due_date = models.DateField(null=True, db_index=True)
     created_date = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)

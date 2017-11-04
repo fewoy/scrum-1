@@ -1,12 +1,16 @@
 [
   {
-    "model": "main.user",
+    "model": "auth.user",
     "pk": 1,
     "fields": {
       "username": "admin",
-      "password": "admin",
+      "password": "pbkdf2_sha256$36000$KdLm1Zvs2d14$VEv9zBRb1d9QpR3ciGpXrWye2lUyWIGdwRateSfI3ms=",
       "email": "admin@admin.com",
-      "admin": 1
+      "first_name": "Admin",
+      "last_name": "istrator",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true
     }
   },
   {
@@ -55,19 +59,33 @@
     "model": "main.tag",
     "pk": 2,
     "fields": {
-      "name": "Windows"
+      "name": "Security"
     }
   },
   {
     "model": "main.tag",
     "pk": 3,
     "fields": {
-      "name": "macOS"
+      "name": "Maintenance"
     }
   },
   {
     "model": "main.tag",
     "pk": 4,
+    "fields": {
+      "name": "Windows"
+    }
+  },
+  {
+    "model": "main.tag",
+    "pk": 5,
+    "fields": {
+      "name": "macOS"
+    }
+  },
+  {
+    "model": "main.tag",
+    "pk": 6,
     "fields": {
       "name": "Linux"
     }

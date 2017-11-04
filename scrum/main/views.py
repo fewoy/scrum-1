@@ -1,29 +1,34 @@
-from django.shortcuts import render
-from django.template import loader
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from .models import *
-
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-
+@login_required
 def index(request):
     users = User.objects.order_by('username')
     output = ", ".join([u.username for u in users])
-    template = loader.get_template('main/index.html')
     context = {
         'output': output,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, "main/index.html", context)
 
+@login_required
 def tags(request):
+    tags = Tag.objects.order_by('name')
+    output = ", ".join([t.name for t in tags])
+
     if request.method == 'GET':
-        tags = Tag.objects.order_by('name')
-        output = ", ".join([t.name for t in tags])
-        template = loader.get_template('main/tags.html')
+        form = TagForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = TagForm()
+
+        return render(request, "main/tags.html", context)
     else:
         form = TagForm(request.POST)
         if form.is_valid():
@@ -33,21 +38,21 @@ def tags(request):
             )
             tag.save()
 
-            return render(request, 'main/tags.html', {})
+            return HttpResponseRedirect("/tags/")
 
-    return render(request, 'main/tags.html', {
-        'form': form,
-    })
-
+@login_required
 def categories(request):
+    categories = Category.objects.order_by('name')
+    output = ", ".join([t.name for t in categories])
+
     if request.method == 'GET':
-        categories = Category.objects.order_by('name')
-        output = ", ".join([c.name for c in categories])
-        template = loader.get_template('main/categories.html')
+        form = CategoryForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = CategoryForm()
+
+        return render(request, "main/categories.html", context)
     else:
         form = CategoryForm(request.POST)
         if form.is_valid():
@@ -57,21 +62,21 @@ def categories(request):
             )
             category.save()
 
-            return render(request, 'main/categories.html', {})
+            return HttpResponseRedirect("/categories/")
 
-    return render(request, 'main/categories.html', {
-        'form': form,
-    })
-
+@login_required
 def points(request):
+    points = Point.objects.order_by('amount')
+    output = ", ".join([p.amount for p in points])
+
     if request.method == 'GET':
-        points = Point.objects.order_by('name')
-        output = ", ".join([p.amount for p in points])
-        template = loader.get_template('main/points.html')
+        form = PointForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = PointForm()
+
+        return render(request, "main/points.html", context)
     else:
         form = PointForm(request.POST)
         if form.is_valid():
@@ -81,127 +86,137 @@ def points(request):
             )
             point.save()
 
-            return render(request, 'main/points.html', {})
+            return HttpResponseRedirect("/points/")
 
-    return render(request, 'main/points.html', {
-        'form': form,
-    })
-
+@login_required
 def leaderboard(request):
     return HttpResponse("Leaderboard")
 
+@login_required
 def backlog(request):
     return HttpResponse("Backlog")
 
+@login_required
 def story(request, story_id):
     return HttpResponse("Story")
 
+@login_required
 def stories(request):
+    stories = UserStory.objects.order_by('name')
+    output = ", ".join([s.name for s in stories])
+
     if request.method == 'GET':
-        stories = UserStory.objects.order_by('name')
-        output = ", ".join([s.name for s in stories])
-        template = loader.get_template('main/stories.html')
+        form = UserStoryForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = UserStoryForm()
+
+        return render(request, "main/stories.html", context)
     else:
         form = UserStoryForm(request.POST)
         if form.is_valid():
 
             story = UserStory.objects.create(
+                name=form.cleaned_data['name'],
                 sprint=form.cleaned_data['sprint'],
                 role=form.cleaned_data['role'],
                 feature=form.cleaned_data['feature'],
                 benefit=form.cleaned_data['benefit'],
                 category=form.cleaned_data['category'],
-                owners=form.cleaned_data['owners'],
-                tags=form.cleaned_data['tags'],
-                required=form.cleaned_data['required'],
                 points=form.cleaned_data['points'],
                 due_date=form.cleaned_data['due_date'],
-                created_date=form.cleaned_data['created_date'],
-                last_updated_date=form.cleaned_data['last_updated_date'],
+                created_date=timezone.now,
+                last_updated_date=timezone.now,
             )
             story.save()
+            # ManyToMany relationships must be added after story is persisted
+            story.required.add(form.cleaned_data['required'])
+            story.owners.add(form.cleaned_data['owners'])
+            story.tags.add(form.cleaned_data['tags'])
 
-            return render(request, 'main/stories.html', {})
+            return HttpResponseRedirect("/stories/")
 
-    return render(request, 'main/stories.html', {
-        'form': form,
-    })
-
+@login_required
 def sprint(request, sprint_id):
     return HttpResponse("Sprint")
 
+@login_required
 def sprints(request):
+    sprints = Sprint.objects.order_by('name')
+    output = ", ".join([s.name for s in sprints])
+
     if request.method == 'GET':
-        sprints = Sprint.objects.order_by('name')
-        output = ", ".join([s.name for s in sprints])
-        template = loader.get_template('main/sprints.html')
+        form = SprintForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = SprintForm()
+
+        return render(request, "main/sprints.html", context)
     else:
         form = SprintForm(request.POST)
         if form.is_valid():
 
             sprint = Sprint.objects.create(
                 name=form.cleaned_data['name'],
+                release=form.cleaned_data['release'],
                 start_date=form.cleaned_data['start_date'],
                 due_date=form.cleaned_data['due_date'],
             )
             sprint.save()
 
-            return render(request, 'main/sprints.html', {})
+            return HttpResponseRedirect("/sprints/")
 
-    return render(request, 'main/sprints.html', {
-        'form': form,
-    })
-
+@login_required
 def user(request, user_id):
     return HttpResponse("User")
 
+@login_required
 def users(request):
+    users = User.objects.order_by('username')
+    output = ", ".join([u.username for u in users])
+
     if request.method == 'GET':
-        users = User.objects.order_by('name')
-        output = ", ".join([u.name for u in users])
-        template = loader.get_template('main/users.html')
+        form = UserForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = UserForm()
+
+        return render(request, "main/users.html", context)
     else:
         form = UserForm(request.POST)
         if form.is_valid():
 
             user = User.objects.create(
                 username=form.cleaned_data['username'],
-                email=form.cleaned_data['email'],
                 password=form.cleaned_data['password'],
-                admin=form.cleaned_data['admin'],
+                email=form.cleaned_data['email'],
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
             )
             user.save()
 
-            return render(request, 'main/users.html', {})
+            return HttpResponseRedirect("/users/")
 
-    return render(request, 'main/users.html', {
-        'form': form,
-    })
-
+@login_required
 def release(request, release_id):
     return HttpResponse("Release")
 
+@login_required
 def releases(request):
+    releases = Release.objects.order_by('name')
+    output = ", ".join([r.name for r in releases])
+
     if request.method == 'GET':
-        releases = Release.objects.order_by('name')
-        output = ", ".join([r.name for r in releases])
-        template = loader.get_template('main/releases.html')
+        form = ReleaseForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = ReleaseForm()
+
+        return render(request, "main/releases.html", context)
     else:
         form = ReleaseForm(request.POST)
         if form.is_valid():
@@ -213,35 +228,38 @@ def releases(request):
             )
             release.save()
 
-            return render(request, 'main/releases.html', {})
+            return HttpResponseRedirect("/releases/")
 
-    return render(request, 'main/releases.html', {
-        'form': form,
-    })
-
+@login_required
 def retrospective(request, release_id):
     return HttpResponse("Release retrospective")
 
+@login_required
 def roles(request):
+    roles = Role.objects.order_by('name')
+    output = ", ".join([r.name for r in roles])
+
     if request.method == 'GET':
-        roles = Role.objects.order_by('name')
-        output = ", ".join([r.name for r in roles])
-        template = loader.get_template('main/roles.html')
+        form = RoleForm()
         context = {
             'output': output,
+            'form': form,
         }
-        form = RoleForm()
+
+        return render(request, "main/roles.html", context)
     else:
         form = RoleForm(request.POST)
         if form.is_valid():
 
-            role = Role.objects.create(
+            role = Tag.objects.create(
                 name=form.cleaned_data['name'],
             )
             role.save()
 
-            return render(request, 'main/roles.html', {})
+            return HttpResponseRedirect("/roles/")
 
-    return render(request, 'main/roles.html', {
-        'form': form,
-    })
+@login_required
+def logout_page(request):
+    logout(request)
+
+    return HttpResponseRedirect("/login")
