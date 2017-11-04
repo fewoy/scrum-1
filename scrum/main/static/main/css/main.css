@@ -17,7 +17,7 @@
 }
 .scrum-modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -33,4 +33,10 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+@media screen and (min-width: 1024px) {
+    .scrum-modal-content {
+        margin: 100px 50px 50px 260px;
+        width: 70%;
+    }
 }

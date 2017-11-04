@@ -1,0 +1,124 @@
+[
+  {
+    "model": "main.user",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "password": "admin",
+      "email": "admin@admin.com",
+      "admin": 1
+    }
+  },
+  {
+    "model": "main.role",
+    "pk": 1,
+    "fields": {
+      "name": "Customer"
+    }
+  },
+  {
+    "model": "main.role",
+    "pk": 2,
+    "fields": {
+      "name": "Internal user"
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 1,
+    "fields": {
+      "name": "Uncategorized"
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 2,
+    "fields": {
+      "name": "Front-end"
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 3,
+    "fields": {
+      "name": "Back-end"
+    }
+  },
+  {
+    "model": "main.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Performance"
+    }
+  },
+  {
+    "model": "main.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Windows"
+    }
+  },
+  {
+    "model": "main.tag",
+    "pk": 3,
+    "fields": {
+      "name": "macOS"
+    }
+  },
+  {
+    "model": "main.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Linux"
+    }
+  },
+  {
+    "model": "main.point",
+    "pk": 1,
+    "fields": {
+      "amount": "1"
+    }
+  },
+  {
+    "model": "main.point",
+    "pk": 2,
+    "fields": {
+      "amount": "2"
+    }
+  },
+  {
+    "model": "main.point",
+    "pk": 3,
+    "fields": {
+      "amount": "4"
+    }
+  },
+  {
+    "model": "main.point",
+    "pk": 4,
+    "fields": {
+      "amount": "8"
+    }
+  },
+  {
+    "model": "main.point",
+    "pk": 5,
+    "fields": {
+      "amount": "16"
+    }
+  },
+  {
+    "model": "main.point",
+    "pk": 6,
+    "fields": {
+      "amount": "24"
+    }
+  },
+  {
+    "model": "main.point",
+    "pk": 7,
+    "fields": {
+      "amount": "40"
+    }
+  }
+]

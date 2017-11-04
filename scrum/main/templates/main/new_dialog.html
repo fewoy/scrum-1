@@ -1,7 +1,7 @@
 <div id="scrum-add-new-modal" class="scrum-modal">
     <div class="scrum-modal-content">
         <span class="scrum-modal-close">&times;</span>
-        <form action="/stories" method="post">
+        <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p  }}
             <input type="submit" value="Submit" />

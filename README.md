@@ -31,30 +31,52 @@ Debian:
 
 `virtualenv -p python3 virutalenv`
 
-Activate virtual environment
+1. Activate virtual environment
 
-`source virutalenv/bin/activate`
+    `source virutalenv/bin/activate`
 
-Install project requirements
+2. Install project requirements
 
-`pip install -r requirements.txt`
+    `pip install -r requirements.txt`
 
 
 ## Usage
 
 From project root:
 
-Activate virtual environment if not already
 
 Debian:
 
-`source virtualenv/bin/activate`
+1. Activate virtual environment if not already
 
-`cd scrum`
+    `source virtualenv/bin/activate`
 
-`python manage.py <commands>`  i.e. runserver, makemigrations, migrate
+2. Change into app directory
 
-Visit `localhost:8000`
+    `cd scrum`
+
+3. One-time database configuration
+
+    3. Migrate database 
+
+        `python manage.py makemigrations`
+
+        `python manage.py migrate`
+
+    3. Load seed data
+
+        `python manage.py loaddata defaukt.json`
+
+4. Run server
+
+    `python manage.py runserver`
+
+5. Visit `localhost:8000/admin`
+
+6. Default admin user
+    * Username: admin
+    * Password: admin
+
 
 To exit virtual python environment:
 
