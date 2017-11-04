@@ -1,0 +1,17 @@
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Scrum</span>
+    <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="/">Home</a>
+        <a class="mdl-navigation__link" href="/stories">Stories</a>
+        <a class="mdl-navigation__link" href="/sprints">Sprints</a>
+        <a class="mdl-navigation__link" href="/releases">Releases</a>
+        <a class="mdl-navigation__link" href="/leaderboard">Leaderboard</a>
+        <a class="mdl-navigation__link" href="/backlog">Backlog</a>
+        {% if admin %}
+        <a class="mdl-navigation__link" href="/users">Users</a>
+        <a class="mdl-navigation__link" href="/users">Categories</a>
+        <a class="mdl-navigation__link" href="/users">Tags</a>
+        <a class="mdl-navigation__link" href="/users">Points</a>
+        {% endif %}
+    </nav>
+</div>

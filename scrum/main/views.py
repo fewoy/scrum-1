@@ -1,11 +1,18 @@
 from django.shortcuts import render
+from django.template import loader
+from .models import User
 
-# Create your views here.
 from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Index")
+    users = User.objects.order_by('username')
+    output = ", ".join([u.username for u in users])
+    template = loader.get_template('main/index.html')
+    context = {
+        'output': output,
+    }
+    return HttpResponse(template.render(context, request))
 
 def tags(request):
     return HttpResponse("Tags")
@@ -19,23 +26,32 @@ def points(request):
 def leaderboard(request):
     return HttpResponse("Leaderboard")
 
-def product_backlog(request):
-    return HttpResponse("Product backlog")
-
-def retrospective(request, release_id):
-    return HttpResponse("Release retrospective")
+def backlog(request):
+    return HttpResponse("Backlog")
 
 def story(request, story_id):
     return HttpResponse("Story")
 
+def stories(request):
+    return HttpResponse("Stories")
+
 def sprint(request, sprint_id):
     return HttpResponse("Sprint")
 
-def users(request):
-    return HttpResponse("Users")
+def sprints(request):
+    return HttpResponse("Sprints")
 
 def user(request, user_id):
     return HttpResponse("User")
 
+def users(request):
+    return HttpResponse("Users")
+
 def release(request, release_id):
     return HttpResponse("Release")
+
+def releases(request):
+    return HttpResponse("Releases")
+
+def retrospective(request, release_id):
+    return HttpResponse("Release retrospective")

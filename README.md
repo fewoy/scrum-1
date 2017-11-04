@@ -17,11 +17,11 @@ Debian:
 
 ### Install Pip
 
-Install (pip)[https://pip.pypa.io/en/stable/installing/]
+Install [pip](https://pip.pypa.io/en/stable/installing/)
 
 ### Virtualenv
 
-Install (Virtualenv)[https://virtualenv.pypa.io/en/stable/]
+Install [Virtualenv](https://virtualenv.pypa.io/en/stable/)
 
 ### Install project environment
 
