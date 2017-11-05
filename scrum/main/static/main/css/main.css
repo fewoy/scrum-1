@@ -25,14 +25,14 @@
     text-align: center;
 }
 .scrum-manifesto-over {
-    opacity: 0.6;
+    opacity: 0.5;
 }
 .scrum-card-text-manifesto {
     width: 100%;
 }
 .scrum-card-text-manifesto p {
     font-size: 18px;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 .scrum-cell-story a {
     text-decoration: none;
@@ -51,7 +51,6 @@
 }
 .scrum-card-manifesto {
     width: 100%;
-    margin: auto;
     text-align: center;
 }
 

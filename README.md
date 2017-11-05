@@ -1,6 +1,6 @@
 python-scrum
 ===
-A minimal implementation of a scrum tool using Django.
+A minimal implementation of a scrum tool using Django and Material Design Lite
 
 ## Requirements
 * Python 3
@@ -65,7 +65,7 @@ Debian:
 
     3. Load seed data
 
-        `python manage.py loaddata defaukt.json`
+        `python manage.py loaddata default.json`
 
 4. Run server
 
