@@ -6,6 +6,7 @@
     <thead>
     <tr>
         <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Color</th>
         <th class="mdl-data-table__cell--non-numeric">Actions</th>
     </tr>
     </thead>
@@ -13,6 +14,7 @@
     {% for category in categories %}
     <tr>
         <td class="mdl-data-table__cell--non-numeric">{{ category.name }}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{ category.color }}</td>
         <td class="mdl-data-table__cell--non-numeric">Edit Delete</td>
     </tr>
     {% endfor %}

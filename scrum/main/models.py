@@ -10,6 +10,7 @@ class Role(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
+    color = models.CharField(max_length=6)
 
     def __str__(self):
         return self.name
@@ -103,6 +104,8 @@ class UserStoryForm(ModelForm):
         points = Point.objects.order_by("amount")
         point_list = [(p.amount, str(p.amount) + " hours") for p in points]
         self.fields['points'] = ChoiceField(choices=point_list)
+        self.fields['sprint'].required = False
+        self.fields['due_date'].required = False
 
 
 class UserForm(ModelForm):
@@ -132,6 +135,7 @@ class CategoryForm(ModelForm):
         fields = '__all__'
         widgets = {
             'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'color': TextInput(attrs={'class': 'mdl-textfield__input'}),
         }
 
 class ReleaseForm(ModelForm):

@@ -2,5 +2,24 @@
 
 {% block content %}
 {% include "main/include/new_dialog.html" %}
-
+<div class="mdl-grid">
+    {% for story in stories %}
+    <div class="mdl-cell scrum-cell-story mdl-cell--4-col">
+        <a href="/story/{{story.id}}">
+            <div class="scrum-card-story mdl-card mdl-shadow--2dp">
+                <div class="scrum-card-priority" style="background-color:#{{story.category.color}};"></div>
+                <div class="scrum-card-story-title mdl-card__title">
+                    {{ story.name }}
+                </div>
+                <div class="scrum-card-story-text mdl-card__supporting-text">
+                    <p>{{ story.priority.name }} - {{ story.points }} hours</p>
+                    {% with "As a "|add:story.role.name|add:", I want "|add:story.feature|add:", so that "|add:story.benefit as description %}
+                    <p>{{ description|truncatechars:100 }}</p>
+                    {% endwith %}
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}

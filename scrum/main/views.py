@@ -94,7 +94,7 @@ def leaderboard(request):
 @login_required
 def backlog(request):
 
-    stories = UserStory.objects.order_by('name')
+    stories = UserStory.objects.filter(sprint__isnull=True).order_by('priority')
 
     if request.method == 'GET':
 
@@ -158,7 +158,7 @@ def stories(request):
         form = UserStoryForm()
 
         return render(request, "main/stories.html", {
-            'output': stories,
+            'stories': stories,
             'form': form,
             'title': "Stories",
         })

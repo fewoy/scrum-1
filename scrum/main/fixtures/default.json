@@ -38,21 +38,24 @@
     "model": "main.category",
     "pk": 1,
     "fields": {
-      "name": "Uncategorized"
+      "name": "Uncategorized",
+      "color": "7f7f7f"
     }
   },
   {
     "model": "main.category",
     "pk": 2,
     "fields": {
-      "name": "Front-end"
+      "name": "Front-end",
+      "color": "33cc33"
     }
   },
   {
     "model": "main.category",
     "pk": 3,
     "fields": {
-      "name": "Back-end"
+      "name": "Back-end",
+      "color": "0066ff"
     }
   },
   {

@@ -6,6 +6,19 @@
 .page-container {
     margin: 0 15px 0 15px;
 }
+.mdl-textfield {
+    width: 100%;
+}
+.page-content {
+    margin: 15px auto 15px auto;
+    max-width: 900px;
+}
+
+/* Cards */
+.scrum-card-priority {
+    width: 100%;
+    height: 6px;
+}
 .scrum-card-manifesto h2 {
     display: block;
     width: 100%;
@@ -21,12 +34,13 @@
     font-size: 18px;
     opacity: 0.9;
 }
-.mdl-textfield {
-    width: 100%;
+.scrum-cell-story a {
+    text-decoration: none;
 }
-.page-content {
-    margin: 15px auto 15px auto;
-    max-width: 900px;
+.scrum-card-story {
+    margin: 16px;
+    width: 100%;
+    height: auto;
 }
 .scrum-cell-step {
     max-height: 150px;
@@ -40,6 +54,7 @@
     margin: auto;
     text-align: center;
 }
+
 /* Add new modal */
 .scrum-add-new {
     position: fixed;
@@ -49,7 +64,7 @@
 .scrum-modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     top: 0;
     width: 100%;
