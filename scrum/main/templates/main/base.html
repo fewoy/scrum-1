@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% include "main/head.html" %}
+    {% include "main/include/head.html" %}
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
                 mdl-layout--fixed-header">
-            {% include "main/header.html" %}
-            {% include "main/drawer.html" %}
+            {% include "main/include/header.html" %}
+            {% include "main/include/drawer.html" %}
                 <main class="mdl-layout__content">
                     <div class="page-container">
                         <div class="page-content">
@@ -13,9 +13,9 @@
                         {% endblock content %}
                         </div>
                     </div>
+                    {% include "main/include/footer.html" %}
                 </main>
-            {% include "main/footer.html" %}
-            {% include "main/scripts.html" %}
+            {% include "main/include/scripts.html" %}
         </div>
     </body>
 </html>

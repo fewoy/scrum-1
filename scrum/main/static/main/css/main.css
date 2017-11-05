@@ -28,13 +28,6 @@
 .scrum-modal-button {
     bottom: 0px;
 }
-.page-container {
-    display: flex;
-}
-.page-content {
-    display: inline-block;
-    vertical-align: top;
-}
 .mdl-textfield {
     width: 100%;
 }
@@ -57,8 +50,5 @@
     .scrum-modal-content {
         margin: 100px 50px 50px calc(var(--drawer-width) + 20px);
         width: 70%;
-    }
-    .scrum-footer {
-        margin: 0px 0px 0px 240px;
     }
 }

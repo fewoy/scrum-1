@@ -136,9 +136,12 @@ def stories(request):
             )
             story.save()
             # ManyToMany relationships must be added after story is persisted
-            story.required.add(form.cleaned_data['required'])
-            story.owners.add(form.cleaned_data['owners'])
-            story.tags.add(form.cleaned_data['tags'])
+            for require in form.cleaned_data['required']:
+                story.required.add(require)
+            for owner in form.cleaned_data['owners']:
+                story.owners.add(owner)
+            for tag in form.cleaned_data['tags']:
+                story.tags.add(tag)
 
             return HttpResponseRedirect("/stories/")
 
