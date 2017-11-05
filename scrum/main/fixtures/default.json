@@ -28,6 +28,13 @@
     }
   },
   {
+    "model": "main.role",
+    "pk": 3,
+    "fields": {
+      "name": "Manager"
+    }
+  },
+  {
     "model": "main.category",
     "pk": 1,
     "fields": {
@@ -91,6 +98,13 @@
     }
   },
   {
+    "model": "main.tag",
+    "pk": 7,
+    "fields": {
+      "name": "Bug"
+    }
+  },
+  {
     "model": "main.point",
     "pk": 1,
     "fields": {
@@ -137,6 +151,46 @@
     "pk": 7,
     "fields": {
       "amount": 40
+    }
+  },
+  {
+    "model": "main.priority",
+    "pk": 1,
+    "fields": {
+      "rank": 1,
+      "name": "Critical"
+    }
+  },
+  {
+    "model": "main.priority",
+    "pk": 1,
+    "fields": {
+      "rank": 1,
+      "name": "Critical"
+    }
+  },
+  {
+    "model": "main.priority",
+    "pk": 2,
+    "fields": {
+      "rank": 2,
+      "name": "High"
+    }
+  },
+  {
+    "model": "main.priority",
+    "pk": 3,
+    "fields": {
+      "rank": 3,
+      "name": "Medium"
+    }
+  },
+  {
+    "model": "main.priority",
+    "pk": 4,
+    "fields": {
+      "rank": 4,
+      "name": "Low"
     }
   }
 ]

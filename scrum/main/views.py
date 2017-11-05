@@ -97,9 +97,54 @@ def leaderboard(request):
 @login_required
 def backlog(request):
 
-    return render(request, "main/backlog.html", {
-        'title': "Backlog",
-    })
+    stories = UserStory.objects.order_by('name')
+    output = ", ".join([s.name for s in stories])
+
+    if request.method == 'GET':
+
+        form = UserStoryForm()
+
+        return render(request, "main/backlog.html", {
+            'output': output,
+            'form': form,
+            'title': "Backlog",
+        })
+
+    else:
+
+        form = UserStoryForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return HttpResponseRedirect("/stories/")
+
+@login_required
+def priorities(request):
+
+    priorities = Priority.objects.order_by('rank')
+    output = ", ".join([p.name for p in priorities])
+
+    if request.method == 'GET':
+
+        form = PriorityForm()
+
+        return render(request, "main/priorities.html", {
+            'output': output,
+            'form': form,
+            'title': "Priorities",
+        })
+
+    else:
+
+        form = PriorityForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return HttpResponseRedirect("/priorities/")
 
 @login_required
 def story(request, story_id):

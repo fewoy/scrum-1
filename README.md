@@ -1,4 +1,4 @@
-PyScrum
+python-scrum
 ===
 A minimal implementation of a scrum tool using Django.
 

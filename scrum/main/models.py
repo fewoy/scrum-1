@@ -20,6 +20,13 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class Priority(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    rank = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
 class Point(models.Model):
     amount = models.IntegerField()
 
@@ -54,6 +61,8 @@ class UserStory(models.Model):
     tags = models.ManyToManyField(Tag, db_index=True, blank=True)
     required = models.ManyToManyField("self", db_index=True, blank=True)
     points = models.IntegerField()
+    completed = models.BooleanField()
+    priority = models.ForeignKey(Priority, db_index=True)
     due_date = models.DateField(null=True, db_index=True)
     created_date = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
     last_updated_date = models.DateTimeField(auto_now=True, editable=False, db_index=True)
@@ -64,7 +73,7 @@ class UserStory(models.Model):
 class StoryLog(models.Model):
     owner = models.ForeignKey(User, editable=False, db_index=True)
     story = models.ForeignKey(UserStory, editable=False, db_index=True)
-    message = models.TextField()
+    message = models.TextField(editable=False)
     created_date = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
 
     def __str__(self):
@@ -144,6 +153,16 @@ class SprintForm(ModelForm):
             'release': Select(attrs={'class': 'mdl-textfield__input'}),
             'start_date': DateInput(attrs={'type': 'date'}),
             'due_date': DateInput(attrs={'type': 'date'}),
+        }
+
+class PriorityForm(ModelForm):
+    class Meta:
+        model = Priority
+        fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={'class': 'mdl-textfield__input'}),
+            'rank': NumberInput(attrs={'class': 'mdl-textfield__input',
+                                       'pattern': '[0-9]*'}),
         }
 
 class PointForm(ModelForm):
