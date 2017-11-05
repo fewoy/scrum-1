@@ -19,10 +19,9 @@ def tags(request):
 
         form = TagForm()
         tags = Tag.objects.order_by('name')
-        output = ", ".join([t.name for t in tags])
 
         return render(request, "main/tags.html", {
-            'output': output,
+            'tags': tags,
             'form': form,
             'title': "Tags",
         })
@@ -44,10 +43,9 @@ def categories(request):
 
         form = CategoryForm()
         categories = Category.objects.order_by('name')
-        output = ", ".join([t.name for t in categories])
 
         return render(request, "main/categories.html", {
-            'output': output,
+            'categories': categories,
             'form': form,
             'title': "Categories",
         })
@@ -69,10 +67,9 @@ def points(request):
 
         form = PointForm()
         points = Point.objects.order_by('amount')
-        output = ", ".join([str(p.amount) for p in points])
 
         return render(request, "main/points.html", {
-            'output': output,
+            'points': points,
             'form': form,
             'title': "Points",
         })
@@ -98,14 +95,13 @@ def leaderboard(request):
 def backlog(request):
 
     stories = UserStory.objects.order_by('name')
-    output = ", ".join([s.name for s in stories])
 
     if request.method == 'GET':
 
         form = UserStoryForm()
 
         return render(request, "main/backlog.html", {
-            'output': output,
+            'stories': stories,
             'form': form,
             'title': "Backlog",
         })
@@ -124,14 +120,13 @@ def backlog(request):
 def priorities(request):
 
     priorities = Priority.objects.order_by('rank')
-    output = ", ".join([p.name for p in priorities])
 
     if request.method == 'GET':
 
         form = PriorityForm()
 
         return render(request, "main/priorities.html", {
-            'output': output,
+            'priorities': priorities,
             'form': form,
             'title': "Priorities",
         })
@@ -157,14 +152,13 @@ def story(request, story_id):
 def stories(request):
 
     stories = UserStory.objects.order_by('name')
-    output = ", ".join([s.name for s in stories])
 
     if request.method == 'GET':
 
         form = UserStoryForm()
 
         return render(request, "main/stories.html", {
-            'output': output,
+            'output': stories,
             'form': form,
             'title': "Stories",
         })
@@ -193,10 +187,9 @@ def sprints(request):
 
         form = SprintForm()
         sprints = Sprint.objects.order_by('name')
-        output = ", ".join([s.name for s in sprints])
 
         return render(request, "main/sprints.html", {
-            'output': output,
+            'sprints': sprints,
             'form': form,
             'title': "Sprints",
         })
@@ -225,10 +218,9 @@ def users(request):
 
         form = UserForm()
         users = User.objects.order_by('username')
-        output = ", ".join([u.username for u in users])
 
         return render(request, "main/users.html", {
-            'output': output,
+            'users': users,
             'form': form,
             'title': "Users",
         })
@@ -257,10 +249,9 @@ def releases(request):
 
         form = ReleaseForm()
         releases = Release.objects.order_by('name')
-        output = ", ".join([r.name for r in releases])
 
         return render(request, "main/releases.html", {
-            'output': output,
+            'releases': releases,
             'form': form,
             'title': "Releases",
         })
@@ -289,10 +280,9 @@ def roles(request):
 
         form = RoleForm()
         roles = Role.objects.order_by('name')
-        output = ", ".join([r.name for r in roles])
 
         return render(request, "main/roles.html", {
-            'output': output,
+            'roles': roles,
             'form': form,
             'title': "Roles",
         })

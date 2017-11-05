@@ -2,5 +2,20 @@
 
 {% block content %}
 {% include "main/include/new_dialog.html" %}
-{{ output }}
+<table class="mdl-data-table mdl-js-data-table">
+    <thead>
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for tag in tags %}
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">{{ tag.name }}</td>
+        <td class="mdl-data-table__cell--non-numeric">Edit Delete</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock content %}
