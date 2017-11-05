@@ -1,3 +1,6 @@
+:root {
+    --drawer-width: 240px;
+}
 .scrum-add-new {
     position: fixed;
     bottom: 24px;
@@ -25,7 +28,12 @@
 .scrum-modal-button {
     bottom: 0px;
 }
+.page-container {
+    display: flex;
+}
 .page-content {
+    display: inline-block;
+    vertical-align: top;
 }
 .mdl-textfield {
     width: 100%;
@@ -47,7 +55,10 @@
 }
 @media screen and (min-width: 1024px) {
     .scrum-modal-content {
-        margin: 100px 50px 50px 260px;
+        margin: 100px 50px 50px calc(var(--drawer-width) + 20px);
         width: 70%;
+    }
+    .scrum-footer {
+        margin: 0px 0px 0px 240px;
     }
 }
