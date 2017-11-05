@@ -1,6 +1,43 @@
 :root {
     --drawer-width: 240px;
 }
+
+/* Content */
+.scrum-card-manifesto h2 {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.scrum-manifesto-over {
+    opacity: 0.6;
+}
+.scrum-card-text-manifesto {
+    width: 100%;
+}
+.scrum-card-text-manifesto p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+.mdl-textfield {
+    width: 100%;
+}
+.page-content {
+    margin: 15px auto 15px auto;
+    max-width: 900px;
+}
+.scrum-cell-step {
+    max-height: 150px;
+}
+.scrum-card-step {
+    width: 100%;
+    min-height: 150px;
+}
+.scrum-card-manifesto {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+/* Add new modal */
 .scrum-add-new {
     position: fixed;
     bottom: 24px;
@@ -27,9 +64,6 @@
 }
 .scrum-modal-button {
     bottom: 0px;
-}
-.mdl-textfield {
-    width: 100%;
 }
 .scrum-modal-input-label {
     display: block;

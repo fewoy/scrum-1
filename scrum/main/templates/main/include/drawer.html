@@ -2,6 +2,7 @@
     <span class="mdl-layout-title">PyScrum</span>
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="/"><i class="material-icons">home</i> Home</a>
+        {% if user.is_authenticated %}
         <a class="mdl-navigation__link" href="/stories"><i class="material-icons">list</i> Stories</a>
         <a class="mdl-navigation__link" href="/sprints"><i class="material-icons">directions_run</i> Sprints</a>
         <a class="mdl-navigation__link" href="/releases"><i class="material-icons">flight_takeoff</i> Releases</a>
@@ -15,5 +16,6 @@
         <a class="mdl-navigation__link" href="/points"><i class="material-icons">plus_one</i> Points</a>
         {% endif %}
         <a class="mdl-navigation__link" href="/logout"><i class="material-icons">subdirectory_arrow_right</i> Logout</a>
+        {% endif %}
     </nav>
 </div>

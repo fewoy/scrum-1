@@ -2,27 +2,27 @@ from django.db import models
 from django.forms import ModelForm, Textarea, TextInput, DateInput, Select, SelectMultiple, ChoiceField, NumberInput
 from django.contrib.auth.models import User
 
-WIDGET_TYPE_TO_CLASS = {
-    "text": "textfield"
-}
-
 class Role(models.Model):
     name = models.CharField(max_length=200)
+
     def __str__(self):
         return self.name
 
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
+
     def __str__(self):
         return self.name
 
 class Tag(models.Model):
     name = models.CharField(max_length=200, db_index=True)
+
     def __str__(self):
         return self.name
 
 class Point(models.Model):
     amount = models.IntegerField()
+
     def __str__(self):
         return self.amount
 
@@ -30,6 +30,7 @@ class Release(models.Model):
     name = models.CharField(max_length=200, unique=True)
     start_date = models.DateField(null=True, db_index=True)
     due_date = models.DateField(null=True, db_index=True)
+
     def __str__(self):
         return self.name
 
@@ -38,6 +39,7 @@ class Sprint(models.Model):
     release = models.ForeignKey(Release)
     start_date = models.DateField(null=True, db_index=True)
     due_date = models.DateField(null=True, db_index=True)
+
     def __str__(self):
         return self.name
 
@@ -55,6 +57,7 @@ class UserStory(models.Model):
     due_date = models.DateField(null=True, db_index=True)
     created_date = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
     last_updated_date = models.DateTimeField(auto_now=True, editable=False, db_index=True)
+
     def __str__(self):
         return self.name
 
@@ -63,6 +66,7 @@ class StoryLog(models.Model):
     story = models.ForeignKey(UserStory, editable=False, db_index=True)
     message = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True, editable=False, db_index=True)
+
     def __str__(self):
         return self.owner.username + " " + self.message
 
@@ -147,5 +151,6 @@ class PointForm(ModelForm):
         model = Point
         fields = '__all__'
         widgets = {
-            'amount': NumberInput(attrs={'class': 'mdl-textfield__input'}),
+            'amount': NumberInput(attrs={'class': 'mdl-textfield__input',
+                                         'pattern': '[0-9]*'}),
         }
